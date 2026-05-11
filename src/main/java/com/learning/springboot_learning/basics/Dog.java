@@ -1,7 +1,6 @@
-package com.learning.springboot_learning;
+package com.learning.springboot_learning.basics;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Component
 public class Dog {
