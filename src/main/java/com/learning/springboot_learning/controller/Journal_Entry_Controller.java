@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController // Component with http requests
-@RequestMapping("/journal")     // mapping in the entire class
+@RequestMapping("/_journal")     // mapping in the entire class
 public class Journal_Entry_Controller {
 
     private Map<Long, Journal_Entry> journalEntryMap = new HashMap<>();
@@ -27,7 +27,7 @@ public class Journal_Entry_Controller {
     // for localhost:8080/journal , for post this method
     public boolean createEntry(@RequestBody Journal_Entry myEntry) { // to tell spring to take data from
                                                                          // request and turn into a java object
-        journalEntryMap.put(myEntry.getId(),myEntry);
+       // journalEntryMap.put(myEntry.getId(),myEntry);
         return true;
 
     }
