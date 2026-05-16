@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Journal_Entry_Service {
@@ -25,25 +26,27 @@ public class Journal_Entry_Service {
         return journalEntryRepository.findAll();
     }
 
-    public Journal_Entry get_by_id(ObjectId id){
-        return journalEntryRepository.findById(id).orElse(null);
+    public Optional<Journal_Entry> get_by_id(ObjectId id){
+        return journalEntryRepository.findById(id);
     }
 
-    public String delete_by_id(ObjectId id ){
+    public Optional<Journal_Entry> delete_by_id(ObjectId id ){
+        Optional<Journal_Entry> objectId = journalEntryRepository.findById(id);
         if(journalEntryRepository.existsById(id)) {
             journalEntryRepository.deleteById(id);
-            return "deletion success";
         }
-        return "id does not exists";
+        return objectId;
     }
 
-    public String update_by_id(ObjectId id , Journal_Entry journalEntry){
-        if(journalEntryRepository.existsById(id)) {
+    public Optional<Journal_Entry> update_by_id(ObjectId id , Journal_Entry journalEntry){
+
+        Optional<Journal_Entry> journalEntryOptional = journalEntryRepository.findById(id);
+
+        if(journalEntryOptional.isPresent()){
             journalEntry.setId(id);
             journalEntryRepository.save(journalEntry);
-            return "update successful";
         }
-        return "id not found";
+        return journalEntryOptional;
 
     }
 
